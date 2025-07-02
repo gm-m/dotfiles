@@ -31,9 +31,8 @@ map('n', '<leader>.', ':Telescope buffers<CR>', opts) -- list all buffers
 map('n', '<leader>e', '<cmd>Oil<CR>', opts)
 
 -- Other mappings
-map('n', '<leader>/', ':normal gcc<CR><DOWN>', {
-    desc = '[/] Toggle comment line'
-})
+map('n', '<C-_>', ':normal gcc<CR><DOWN>', opts) -- toggle comment line (INFO: Most terminals send the same key code for <C-/> and <C-_>.)
+map('v', '<C-_>', ":'<,'>normal gcc<CR>", opts) -- toggle comment selection (INFO: Most terminals send the same key code for <C-/> and <C-_>.)
 map('n', '<leader>r', ':earlier 1f<CR>', opts) -- revert file
 map('n', '<C-w>', ':bd<CR>', opts) -- close file
 map('n', '<C-s>', '<cmd>w<CR>', opts) -- save file
