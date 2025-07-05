@@ -18,6 +18,11 @@ vim.api.nvim_create_autocmd({"ModeChanged"}, {
     end
 })
 
+-- enable timeout for key sequences
+vim.opt.timeout = true        
+-- wait 200 ms (default is 1000 ms). Useful for keymaps with multiple mappings that start with the same key (e.g. <leader>f and <leader>ff ) 
+vim.opt.timeoutlen = 200      
+
 -- Colorscheme / Theme
 -- vim.cmd('colorscheme rose-pine-main')
 vim.cmd('colorscheme kanso-zen')

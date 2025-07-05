@@ -53,6 +53,9 @@ require("typescript-tools").setup({
         vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
         vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
         vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+        vim.keymap.set('n', '<leader>=', function()
+            vim.lsp.buf.format({ async = true })
+        end, bufopts)
         
         -- TypeScript specific mappings
         vim.keymap.set('n', '<leader>to', ':TSToolsOrganizeImports<CR>', bufopts)
