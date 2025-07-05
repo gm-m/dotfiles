@@ -4,12 +4,12 @@ local opts = {
 }
 
 -- Move current line up and down
-vim.keymap.set('n', '<A-j>', ':m .+1<CR>==', opts)
-vim.keymap.set('n', '<A-k>', ':m .-2<CR>==', opts)
+vim.keymap.set('n', '<A-down>', ':m .+1<CR>==', opts)
+vim.keymap.set('n', '<A-up>', ':m .-2<CR>==', opts)
 
 -- Move current visual-line selection up and down
-vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv", opts)
-vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", opts)
+vim.keymap.set('v', '<A-down>', ":m '>+1<CR>gv=gv", opts)
+vim.keymap.set('v', '<A-up>', ":m '<-2<CR>gv=gv", opts)
 
 -- Remap p in visual mode to paste, reselect, and yank
 vim.keymap.set('x', 'p', 'p`[v`]y', {
@@ -43,6 +43,10 @@ map('n', '<C-h>', '<C-w>h', opts) -- switch window left
 map('n', '<C-l>', '<C-w>l', opts) -- switch window right
 map('n', '<C-j>', '<C-w>j', opts) -- switch window down
 map('n', '<C-k>', '<C-w>k', opts) -- switch window up
+
+-- Diagnostic navigation
+vim.keymap.set('n', '<A-j>', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic' })
+vim.keymap.set('n', '<A-k>', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic' })
 
 -- Harpoon mappings
 local harpoon = require("harpoon")
