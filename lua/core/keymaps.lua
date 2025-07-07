@@ -36,13 +36,19 @@ map('v', '<C-_>', ":'<,'>normal gcc<CR>", opts) -- toggle comment selection (INF
 map('n', '<leader>r', ':earlier 1f<CR>', opts) -- revert file
 map('n', '<C-w>', ':bd<CR>', opts) -- close file
 map('n', '<C-s>', '<cmd>w<CR>', opts) -- save file
-map('n', '<C-right>', ':bnext<CR>', opts) -- go to the next buffer
-map('n', '<C-left>', ':bprevious<CR>', opts) -- go to previous buffer
 map('n', '<Esc>', '<cmd>noh<CR>', opts) -- clear highlights
 map('n', '<C-h>', '<C-w>h', opts) -- switch window left
 map('n', '<C-l>', '<C-w>l', opts) -- switch window right
 map('n', '<C-j>', '<C-w>j', opts) -- switch window down
 map('n', '<C-k>', '<C-w>k', opts) -- switch window up
+
+-- Jumplist navigation (Go Back/Forward)
+map('n', '<C-left>', '<C-o>', opts)
+map('n', '<C-right>', '<C-i>', opts)
+
+-- Buffer switching
+map('n', '<A-left>', ':bprevious<CR>', opts)
+map('n', '<A-right>', ':bnext<CR>', opts)
 
 -- Diagnostic navigation
 vim.keymap.set('n', '<A-j>', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic' })
