@@ -1,0 +1,101 @@
+// Zed keymap - Ported from VS Code
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "bindings": {
+      // Navigation in menus/pickers
+      "ctrl-k": "menu::SelectPrevious",
+      "ctrl-j": "menu::SelectNext"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      // Find in files
+      // "space s": "pane::DeploySearch",
+      // "space shift-f": "pane::DeploySearch"
+    }
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      // Toggle file explorer
+      "space e": "workspace::ToggleLeftDock",
+
+      // Navigation between panes
+      "ctrl-l": "workspace::ActivatePaneRight",
+
+      // File operations (vim-style)
+      "y": "project_panel::Copy",
+      "p": "project_panel::Paste",
+      "n": "project_panel::NewFile",
+      "r": "project_panel::Rename",
+      "d": "project_panel::Delete",
+      "/": "project_panel::NewSearchInDirectory"
+    }
+  },
+  {
+    "context": "Picker || menu",
+    "use_key_equivalents": true,
+    "bindings": {
+      "up": "menu::SelectPrevious",
+      "down": "menu::SelectNext",
+      "ctrl-j": "menu::SelectNext",
+      "ctrl-k": "menu::SelectPrevious"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      // Navigate between panes
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+
+      // Navigate to next/prev diagnostic
+      "alt-j": "editor::GoToDiagnostic",
+      // "alt-k": "editor::GoToPrevDiagnostic",
+
+      // Find references
+      "alt-a": "editor::FindAllReferences"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      // Toggle file explorer
+      "space e": "workspace::ToggleLeftDock",
+
+      // Reload file
+      "space r": "editor::ReloadFile"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // Autocomplete navigation
+      "ctrl-j": "editor::ContextMenuNext",
+      "ctrl-k": "editor::ContextMenuPrevious"
+    }
+  },
+  {
+    "context": "VimControl && !menu && vim_mode != operator",
+    "bindings": {
+      // Subword navigation (camelCase/snake_case)
+      "space w": "vim::NextSubwordStart",
+      "space b": "vim::PreviousSubwordStart"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      // Navigate between panes from terminal
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight"
+    }
+  }
+]
