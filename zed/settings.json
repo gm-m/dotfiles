@@ -1,0 +1,50 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "vim_mode": true,
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "base_keymap": "VSCode",
+  "agent": {
+    "enabled": true,
+    "button": true,
+    "model_parameters": []
+  },
+  "preview_tabs": {
+    "enabled": false
+  },
+  "tab_bar": {
+    "show": false
+  },
+  "fast_scroll_sensitivity": 8.0,
+  "minimap": {
+    "show": "never"
+  },
+  "cursor_blink": true,
+  "file_types": {
+    "tailwindcss": ["*.scss"]
+  },
+  "linked_edits": true,
+  "show_edit_predictions": true,
+  "indent_guides": {
+    "enabled": false
+  },
+  "soft_wrap": "none",
+  "buffer_font_family": "TX-02",
+  "ui_font_family": "TX-02",
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "Ayu Light",
+    "dark": "Kanso Ink (No italics)"
+  }
+}
