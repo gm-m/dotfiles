@@ -56,3 +56,4 @@ function dotfiles {
     git --git-dir=$HOME\dotFiles\bareRepo --work-tree=$HOME\dotFiles\configs @args
 }
 
+oh-my-posh init pwsh | Invoke-Expression
