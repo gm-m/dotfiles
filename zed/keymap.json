@@ -22,14 +22,26 @@
     }
   },
   {
+    "context": "Workspace || Editor",
+    "bindings": {
+      // Navigate between panes
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight"
+    }
+  },
+  {
     "context": "ProjectPanel",
     "bindings": {
       // Toggle file explorer
       "space e": "workspace::ToggleLeftDock",
 
       // Navigation between panes
-      "ctrl-l": "workspace::ActivatePaneRight",
-
+      "ctrl-l": "workspace::ActivatePaneRight"
+    }
+  },
+  {
+    "context": "ProjectPanel && !editing",
+    "bindings": {
       // File operations (vim-style)
       "y": "project_panel::Copy",
       "p": "project_panel::Paste",
@@ -52,10 +64,6 @@
   {
     "context": "Editor",
     "bindings": {
-      // Navigate between panes
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-l": "workspace::ActivatePaneRight",
-
       // Navigate to next/prev diagnostic
       "alt-j": "editor::GoToDiagnostic",
       // "alt-k": "editor::GoToPrevDiagnostic",
