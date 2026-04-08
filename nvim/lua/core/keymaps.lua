@@ -19,7 +19,7 @@ vim.keymap.set('x', 'p', 'p`[v`]y', {
 })
 
 -- Telescope mappings
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 map('n', '<leader>f', ':Telescope find_files<CR>', opts)
 map('n', '<leader>F', ':Telescope live_grep<CR>', opts)
 -- map('n', '<leader>fs', ':Telescope lsp_workspace_symbols<CR>', opts)  -- search symbols

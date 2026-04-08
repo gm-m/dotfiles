@@ -99,6 +99,40 @@ return {
 	version = '*',
 	config = function() require("mini.ai").setup() end
     },
+    {
+	    "nvim-treesitter/nvim-treesitter",
+	    branch = "main",
+	    lazy = false,
+	    build = ":TSUpdate",
+	    config = function()
+		    local ts = require("nvim-treesitter")
+		    local languages = {
+			    "bash",
+			    "javascript",
+			    "json",
+			    "lua",
+			    "markdown",
+			    "markdown_inline",
+			    "query",
+			    "tsx",
+			    "typescript",
+			    "vim",
+			    "vimdoc",
+		    }
+
+		    ts.install(languages)
+
+		    vim.api.nvim_create_autocmd("FileType", {
+			    pattern = languages,
+			    callback = function(args)
+				    pcall(vim.treesitter.start, args.buf)
+				    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+				    vim.wo.foldmethod = 'expr'
+				    vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+			    end,
+		    })
+	    end,
+    },
     -- Colorscheme
     {
 	    "webhooked/kanso.nvim",
@@ -111,18 +145,7 @@ return {
     -- LSP
     {
         "neovim/nvim-lspconfig",
-        dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
-        }
-    },
-    {
-        "hrsh7th/nvim-cmp",
-        dependencies = {
-            "L3MON4D3/LuaSnip",
-            "saadparwaiz1/cmp_luasnip",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-        }
+        dependencies = {}
     },
     {
         "pmizio/typescript-tools.nvim",

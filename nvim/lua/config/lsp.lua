@@ -11,40 +11,30 @@ vim.diagnostic.config({
     severity_sort = true,
 })
 
-local cmp = require('cmp')
-local luasnip = require('luasnip')
+vim.opt.completeopt = "menu,menuone,noselect,popup"
+vim.o.autocomplete = true
 
--- Setup nvim-cmp
-cmp.setup({
-    snippet = {
-        expand = function(args)
-            luasnip.lsp_expand(args.body)
-        end,
-    },
-    mapping = cmp.mapping.preset.insert({
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    }),
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'buffer' },
-        { name = 'path' },
-    }),
-})
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("user_lsp_attach", { clear = true }),
+    callback = function(args)
+        local client_id = args.data and args.data.client_id or nil
+        if not client_id then
+            return
+        end
 
--- Setup TypeScript Tools
-require("typescript-tools").setup({
-    capabilities = require('cmp_nvim_lsp').default_capabilities(),
-    on_attach = function(client, bufnr)
-        -- Enable completion triggered by <c-x><c-o>
-        vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+        local client = vim.lsp.get_client_by_id(client_id)
+        if not client then
+            return
+        end
 
-        -- Mappings
-        local bufopts = { noremap=true, silent=true, buffer=bufnr }
+        local bufnr = args.buf
+        vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+        if client:supports_method("textDocument/completion") then
+            vim.lsp.completion.enable(true, client_id, bufnr, { autotrigger = true })
+        end
+
+        local bufopts = { noremap = true, silent = true, buffer = bufnr }
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -56,10 +46,16 @@ require("typescript-tools").setup({
         vim.keymap.set('n', '<leader>=', function()
             vim.lsp.buf.format({ async = true })
         end, bufopts)
-        
-        -- TypeScript specific mappings
-        vim.keymap.set('n', '<leader>to', ':TSToolsOrganizeImports<CR>', bufopts)
-        vim.keymap.set('n', '<leader>ta', ':TSToolsAddMissingImports<CR>', bufopts)
-        vim.keymap.set('n', '<leader>tr', ':TSToolsRemoveUnusedImports<CR>', bufopts)
+
+        local ft = vim.bo[bufnr].filetype
+        if ft == 'javascript' or ft == 'javascriptreact' or ft == 'typescript' or ft == 'typescriptreact' then
+            vim.keymap.set('n', '<leader>to', '<cmd>TSToolsOrganizeImports<CR>', bufopts)
+            vim.keymap.set('n', '<leader>ta', '<cmd>TSToolsAddMissingImports<CR>', bufopts)
+            vim.keymap.set('n', '<leader>tr', '<cmd>TSToolsRemoveUnusedImports<CR>', bufopts)
+        end
     end,
+})
+
+-- Setup TypeScript Tools
+require("typescript-tools").setup({
 })
